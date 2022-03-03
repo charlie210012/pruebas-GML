@@ -97,6 +97,7 @@ $(document).on("click","#btnUsuario",function(){
         url:  "{{ url('user_data') }}",
         data: datos,
         success: function(r){
+            console.log(r['bugs'])
             if(r['message']=="error"){
                 Swal.fire({        
                 title: '¡Atención!',

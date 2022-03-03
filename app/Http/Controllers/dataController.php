@@ -68,8 +68,8 @@ class dataController extends Controller
         $request->address!==null &
         $request->phone!==null &
         $request->categoryUser!=="Seleccione una categoria" &
-        ctype_alpha($request->nameUser)==true &
-        ctype_alpha($request->lastNameUser)==true
+        ctype_alpha(str_replace(" ","",$request->nameUser))==true &
+        ctype_alpha(str_replace(" ","",$request->lastNameUser)==true)
         )
         {
 
@@ -199,8 +199,8 @@ class dataController extends Controller
         $request->editAddress==null or
         $request->editPhone==null or
         $request->editCategoryUser=="Seleccione una categoria" or
-        ctype_alpha($request->nameUser)==false or
-        ctype_alpha($request->lastNameUser)==false)
+        ctype_alpha(str_replace(" ","",$request->editNameUser))==false or
+        ctype_alpha(str_replace(" ","",$request->editLastNameUser)==false))
         {
 
             return response()->json([

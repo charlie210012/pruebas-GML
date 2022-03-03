@@ -112,15 +112,15 @@
 </div>
 <script>
     
-    const form = document.getElementById('editusercreate');
-    const inputs = document.querySelectorAll("#editusercreate input");
+    const formEdit = document.getElementById('editusercreate');
+    const Einputs = document.querySelectorAll("#editusercreate input");
 
-    const expresiones = {
-        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-        texto: /^[a-zA-ZÀ-ÿ\s]{1,100}$/
-    }
+    // const expresiones = {
+    //     correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    //     texto: /^[a-zA-ZÀ-ÿ\s]{1,100}$/
+    // }
 
-    const validarFormulario = (e) =>{
+    const validarFormularioEdit = (e) =>{
 
         switch (e.target.name){
             case "editNameUser":
@@ -141,7 +141,7 @@
                     document.getElementById('btnUsuarioEdit').disabled = false;
                 }
             break;
-            case "EidentifierAlert":
+            case "editIdentifier":
                 if( isNaN(e.target.value) ) {
                     document.getElementById("EidentifierAlert").style.display = "block";
                     document.getElementById('btnUsuarioEdit').disabled = true;
@@ -182,8 +182,8 @@
     }
 
 
-    inputs.forEach((input) => {
-        input.addEventListener('keyup',validarFormulario);
-        input.addEventListener('blur',validarFormulario);
+    Einputs.forEach((Einput) => {
+        Einput.addEventListener('keyup',validarFormularioEdit);
+        Einput.addEventListener('blur',validarFormularioEdit);
     });
 </script>
