@@ -68,8 +68,8 @@ class dataController extends Controller
         $request->address!==null &
         $request->phone!==null &
         $request->categoryUser!=="Seleccione una categoria" &
-        ctype_alpha(str_replace(" ","",$request->nameUser))==true &
-        ctype_alpha(str_replace(" ","",$request->lastNameUser)==true)
+        ctype_alpha(str_replace(" ","",$request->nameUser)) &
+        ctype_alpha(str_replace(" ","",$request->lastNameUser))
         )
         {
 
