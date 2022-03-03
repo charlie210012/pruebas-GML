@@ -109,62 +109,74 @@
     </div>
 </div>
 <script>
-    const btnUsuario = document.getElementById('btnUsuario');
+    
     const form = document.getElementById('userCreate');
     const inputs = document.querySelectorAll("#userCreate input");
 
     const expresiones = {
-        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+        texto: /^[a-zA-ZÀ-ÿ\s]{1,100}$/
     }
 
     const validarFormulario = (e) =>{
 
-        
         switch (e.target.name){
             case "nameUser":
-                if( e.target.value == null || e.target.value.length <= 5 || /^\s+$/.test(e.target.value) ) {
+                if( e.target.value == null || e.target.value.length <= 5 || e.target.value.length >= 100  || (!expresiones.texto.test(e.target.value)) ) {
                     document.getElementById("namealert").style.display = "block";
+                    document.getElementById('btnUsuario').disabled = true;
                 }else{
                     document.getElementById("namealert").style.display = "none";
+                    document.getElementById('btnUsuario').disabled = false;
                 }
             break;
             case "lastNameUser":
-                if( e.target.value == null || e.target.value.length <= 0 || /^\s+$/.test(e.target.value) ) {
+                if( e.target.value == null || e.target.value.length <= 0 || e.target.value.length >= 100  || (!expresiones.texto.test(e.target.value)) ) {
                     document.getElementById("lastnamealert").style.display = "block";
+                    document.getElementById('btnUsuario').disabled = true;
                 }else{
                     document.getElementById("lastnamealert").style.display = "none";
+                    document.getElementById('btnUsuario').disabled = false;
                 }
             break;
             case "identifier":
                 if( isNaN(e.target.value) ) {
                     document.getElementById("identifierAlert").style.display = "block";
+                    document.getElementById('btnUsuario').disabled = true;
                 }else{
                     document.getElementById("identifierAlert").style.display = "none";
+                    document.getElementById('btnUsuario').disabled = false;
                 }
             break;
             case "emailuser":
                 if( !expresiones.correo.test(e.target.value)) {
                     document.getElementById("emailAlert").style.display = "block";
+                    document.getElementById('btnUsuario').disabled = true;
                 }else{
                     document.getElementById("emailAlert").style.display = "none";
+                    document.getElementById('btnUsuario').disabled = false;
                 }
             break;
             case "address":
                 if( e.target.value.length >= 180 ) {
                     document.getElementById("addressAlert").style.display = "block";
+                    document.getElementById('btnUsuario').disabled = true;
                 }else{
                     document.getElementById("addressAlert").style.display = "none";
+                    document.getElementById('btnUsuario').disabled = false;
                 }
             break;
             case "phone":
                 if( e.target.value.length != 10 ) {
                     document.getElementById("phoneAlert").style.display = "block";
+                    document.getElementById('btnUsuario').disabled = true;
                 }else{
                     document.getElementById("phoneAlert").style.display = "none";
+                    document.getElementById('btnUsuario').disabled = false;
                 }
             break;
         }
-    
+        
     }
 
 

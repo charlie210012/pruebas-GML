@@ -61,15 +61,18 @@ class dataController extends Controller
      */
     public function store(Request $request)
     {
-       
+        
         if($request->nameUser!==null &
         $request->lastNameUser!==null &
         $request->identifier!==null &
         $request->emailuser!==null &
-        $request->country!==null &
+        $request->country!=="Seleccione un pais" &
         $request->address!==null &
         $request->phone!==null &
-        $request->categoryUser!=="Seleccione una categoria")
+        $request->categoryUser!=="Seleccione una categoria" &
+        ctype_alpha($request->nameUser)==false&
+        ctype_alpha($request->lastNameUser)==false
+        )
         {
 
 
@@ -121,17 +124,10 @@ class dataController extends Controller
 
                     return response()->json([
                         'message' => 'ok',
-                        'usuario'=>$usuario,
+                        'usuario'=>$usuario
                     ]);
                 }
-                
 
-            
-                
-
-                
-
-                
             }else{
                 return response()->json([
                     'message' => 'error',
@@ -143,7 +139,7 @@ class dataController extends Controller
         }else{
             return response()->json([
                 'message' => 'error',
-                'alerta'=>'Todos los datos son obligatorios'
+                'alerta'=>'Revisa la integridad de los campos, todos los datos son obligatorios'
             ]);
         }
         
@@ -241,4 +237,5 @@ class dataController extends Controller
 
         
     }
+    
 }

@@ -1,4 +1,4 @@
-# Software Prueba Nexura
+# Software Prueba GML Software
 
 ## Parametros de funcionamiento
 
@@ -18,8 +18,11 @@ Archivo **.env**
 **usa php artisan serve si estas usando xampp** 
 
 
-**link de requerimiento desplegado: (http://dev1.carlosandresarevalo.tech/)**
+**link de requerimiento desplegado: (http://gml.carlosandresarevalo.tech/)**
+
+**link del repositorio: (https://github.com/charlie210012/pruebas-GML.git)**
 
 #### Desarrollador
+
 
 - **[Carlos Arevalo](https://github.com/charlie210012)**
