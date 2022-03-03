@@ -39,7 +39,7 @@
                                                 <th scope="col">  Direccion</th>
                                                 <th scope="col">  Celular</th>
                                                 <th scope="col">  Categoria</th>
-                                                <th scope="col">Modificar</th>
+                                                <th scope="col">  Modificar</th>
                                             </tr>
                                         </thead>
                                         <tbody>

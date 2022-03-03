@@ -30,23 +30,34 @@
                                 </div>
                                 <label class="control-label">Nombres *</label>
                                 <input class="form-control" id="nameUser" name="nameUser" type="text"
-                                    placeholder="Ingresa tu nombre completo" required>
+                                    placeholder="Ingresa tu nombre completo"  required>
+                            </div>
+                            <div class="alert alert-danger" id="namealert" name="namealert"  role="alert" style="display:none">
+                                No se permiten numeros, solo letras minimo 5 y maximo 100 caracteres
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Apellidos *</label>
                                 <input class="form-control" id="lastNameUser" name="lastNameUser" type="text"
                                     placeholder="Ingresa tus apellidos" required>
                             </div>
+                            <div class="alert alert-danger" id="lastnamealert" name="lastnamealert"  role="alert" style="display:none">
+                                No se permiten numeros, solo letras maximo 100 caracteres
+                            </div>
                             <div class="form-group">
                                 <label class="control-label">Cedula *</label>
                                 <input class="form-control" id="identifier" name="identifier" type="number"
                                     placeholder="Ingresa tu número de cedula" required>
                             </div>
-
+                            <div class="alert alert-danger" id="identifierAlert" name="identifierAlert"  role="alert" style="display:none">
+                                solo se permiten caracteres numericos
+                            </div>
                             <div class="form-group">
                                 <label class="control-label">Correo Electronico *</label>
                                 <input class="form-control" id="emailuser" name="emailuser" type="email"
                                     placeholder="ingresa tu correo electrónico" required>
+                            </div>
+                            <div class="alert alert-danger" id="emailAlert" name="emailAlert"  role="alert" style="display:none">
+                                Ingresa un correo electroníco valido
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Pais *</label>
@@ -63,10 +74,16 @@
                                 <input class="form-control" id="address" name="address" type="text" placeholder="Ingresa tu dirección"
                                     required>
                             </div>
+                            <div class="alert alert-danger" id="addressAlert" name="addressAlert"  role="alert" style="display:none">
+                                Se permiten maximo 180 caracteres
+                            </div>
                             <div class="form-group">
                                 <label class="control-label">Celular *</label>
-                                <input class="form-control" id="phone" name="phone" type="text" placeholder="Ingresa tu número de celular"
+                                <input class="form-control" id="phone" name="phone" type="number" placeholder="Ingresa tu número de celular"
                                     required>
+                            </div>
+                            <div class="alert alert-danger" id="phoneAlert" name="phoneAlert"  role="alert" style="display:none">
+                                Numero no valido
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Categoria *</label>
@@ -80,7 +97,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary" id="btnUsuario"><span id="btntext"
+                                <button type="submit"  class="btn btn-primary" id="btnUsuario"><span id="btntext"
                                         class="bg-light"></span>Agregar</button>
                             </div>
                         </form>
@@ -92,45 +109,64 @@
     </div>
 </div>
 <script>
+    const btnUsuario = document.getElementById('btnUsuario');
     const form = document.getElementById('userCreate');
     const inputs = document.querySelectorAll("#userCreate input");
 
     const expresiones = {
-        usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
-        nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-        password: /^.{4,12}$/, // 4 a 12 digitos.
-        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-        telefono: /^\d{7,14}$/ // 7 a 14 numeros.
+        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
     }
 
     const validarFormulario = (e) =>{
+
+        
         switch (e.target.name){
             case "nameUser":
-                console.log("Funciona")
+                if( e.target.value == null || e.target.value.length <= 5 || /^\s+$/.test(e.target.value) ) {
+                    document.getElementById("namealert").style.display = "block";
+                }else{
+                    document.getElementById("namealert").style.display = "none";
+                }
             break;
             case "lastNameUser":
-                console.log("Funciona")
+                if( e.target.value == null || e.target.value.length <= 0 || /^\s+$/.test(e.target.value) ) {
+                    document.getElementById("lastnamealert").style.display = "block";
+                }else{
+                    document.getElementById("lastnamealert").style.display = "none";
+                }
             break;
             case "identifier":
-                console.log("Funciona")
+                if( isNaN(e.target.value) ) {
+                    document.getElementById("identifierAlert").style.display = "block";
+                }else{
+                    document.getElementById("identifierAlert").style.display = "none";
+                }
             break;
             case "emailuser":
-                console.log("Funciona")
-            break;
-            case "country":
-                console.log("Funciona")
+                if( !expresiones.correo.test(e.target.value)) {
+                    document.getElementById("emailAlert").style.display = "block";
+                }else{
+                    document.getElementById("emailAlert").style.display = "none";
+                }
             break;
             case "address":
-                console.log("Funciona")
+                if( e.target.value.length >= 180 ) {
+                    document.getElementById("addressAlert").style.display = "block";
+                }else{
+                    document.getElementById("addressAlert").style.display = "none";
+                }
             break;
             case "phone":
-                console.log("Funciona")
-            break;
-            case "categoryUser":
-                console.log("Funciona")
+                if( e.target.value.length != 10 ) {
+                    document.getElementById("phoneAlert").style.display = "block";
+                }else{
+                    document.getElementById("phoneAlert").style.display = "none";
+                }
             break;
         }
+    
     }
+
 
     inputs.forEach((input) => {
         input.addEventListener('keyup',validarFormulario);
