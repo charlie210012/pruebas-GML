@@ -14,7 +14,7 @@ class emailController extends Controller
         if(empty($validation)){
             email::latest('id')->first()->delete();
             $email = new email([
-                'email' => $request->emailAdmin,
+                'email' => trim($request->emailAdmin),
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

@@ -29,23 +29,23 @@
                                 </div>
                                 <label class="control-label">Nombres *</label>
                                 <input class="form-control" id="editNameUser" name="editNameUser" type="text"
-                                    placeholder="Nombres" required>
+                                    placeholder="Ingresa tu nombre completo" required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Apellidos *</label>
                                 <input class="form-control" id="editLastNameUser" name="editLastNameUser" type="text"
-                                    placeholder="Apellidos" required>
+                                    placeholder="Ingresa tus apellidos" required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Cedula *</label>
                                 <input class="form-control" id="editIdentifier" name="editIdentifier" type="number"
-                                    placeholder="Cedula" required>
+                                    placeholder="Ingresa tu número de cedula" required>
                             </div>
 
                             <div class="form-group">
                                 <label class="control-label">Correo Electronico *</label>
                                 <input class="form-control" id="editEmailuser" name="editEmailuser" type="email"
-                                    placeholder="Correo electronico" required>
+                                    placeholder="ingresa tu correo electrónico" required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Pais *</label>
@@ -60,11 +60,11 @@
                             <div class="form-group">
                                 <label class="control-label">Dirección *</label>
                                 <input class="form-control" id="editAddress" name="editAddress" type="text"
-                                    placeholder="Direccción" required>
+                                    placeholder="Ingresa tu dirección" required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Celular *</label>
-                                <input class="form-control" id="editPhone" name="editPhone" type="text" placeholder="Pais"
+                                <input class="form-control" id="editPhone" name="editPhone" type="text" placeholder="Ingresa tu número de celular"
                                     required>
                             </div>
                             <div class="form-group">

@@ -82,11 +82,11 @@ class dataController extends Controller
                 $usuario = new usuario([
                     'nombres' => $request->nameUser,
                     'apellidos' => $request->lastNameUser,
-                    'cedula' => $request->identifier,
-                    'email'=> $request->emailuser,
-                    'pais'=> $request->country,
+                    'cedula' => trim($request->identifier),
+                    'email'=> trim($request->emailuser),
+                    'pais'=> trim($request->country),
                     'direccion'=> $request->address,
-                    'celular'=> $request->phone,
+                    'celular'=> trim($request->phone),
                     'categoria_id'=> $request->categoryUser,
                     'created_at' => now(),
                     'updated_at' => now()

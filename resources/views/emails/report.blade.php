@@ -16,8 +16,10 @@
         </thead>
         <tbody>
             @foreach($data->data["reports"] as $report)
+            <tr>
                 <td>{{ $report[0] }}</td>
                 <td>{{ $report[1] }}</td>
+            </tr>
             @endforeach
         </tbody>
     </table> 
