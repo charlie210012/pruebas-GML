@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\empleado;
-use App\Models\empleado_rol;
-use App\Models\rol;
+
 use App\Models\categoria;
 use Illuminate\Http\Request;
 use App\Events\userRegistered;

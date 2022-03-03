@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\usuario;
-use App\Models\empleado_rol;
-use App\Models\rol;
 use App\Events\userRegistered;
 use App\Http\Controllers\userController;
 use App\Models\email;
@@ -70,8 +68,8 @@ class dataController extends Controller
         $request->address!==null &
         $request->phone!==null &
         $request->categoryUser!=="Seleccione una categoria" &
-        ctype_alpha($request->nameUser)==false&
-        ctype_alpha($request->lastNameUser)==false
+        ctype_alpha($request->nameUser)==true &
+        ctype_alpha($request->lastNameUser)==true
         )
         {
 
@@ -87,7 +85,7 @@ class dataController extends Controller
                     'apellidos' => $request->lastNameUser,
                     'cedula' => trim($request->identifier),
                     'email'=> trim($request->emailuser),
-                    'pais'=> trim($request->country),
+                    'pais'=> $request->country,
                     'direccion'=> $request->address,
                     'celular'=> trim($request->phone),
                     'categoria_id'=> $request->categoryUser,
@@ -193,14 +191,16 @@ class dataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->editNameUser=="" or
-        $request->editLastNameUser=="" or
-        $request->editIdentifier=="" or
-        $request->editEmailuser=="" or
-        $request->editCountry=="" or
-        $request->editAddress=="" or
-        $request->editPhone=="" or
-        $request->editCategoryUser=="")
+        if($request->editNameUser==null or
+        $request->editLastNameUser==null or
+        $request->editIdentifier==null or
+        $request->editEmailuser==null or
+        $request->editCountry=="Seleccione un pais" or
+        $request->editAddress==null or
+        $request->editPhone==null or
+        $request->editCategoryUser=="Seleccione una categoria" or
+        ctype_alpha($request->nameUser)==false or
+        ctype_alpha($request->lastNameUser)==false)
         {
 
             return response()->json([
@@ -212,11 +212,11 @@ class dataController extends Controller
             $usuario = usuario::find($id)->update([
                 'nombres' => $request->editNameUser,
                 'apellidos' => $request->editLastNameUser,
-                'cedula' => $request->editIdentifier,
-                'email'=> $request->editEmailuser,
+                'cedula' => trim($request->editIdentifier),
+                'email'=> trim($request->editEmailuser),
                 'pais'=> $request->editCountry,
                 'direccion'=> $request->editAddress,
-                'celular'=> $request->editPhone,
+                'celular'=> trim($request->editPhone),
                 'categoria_id'=> $request->editCategoryUser,
                 'updated_at' => now()
             ]);

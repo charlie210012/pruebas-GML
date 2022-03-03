@@ -31,21 +31,33 @@
                                 <input class="form-control" id="editNameUser" name="editNameUser" type="text"
                                     placeholder="Ingresa tu nombre completo" required>
                             </div>
+                            <div class="alert alert-danger" id="Enamealert" name="Enamealert"  role="alert" style="display:none">
+                                No se permiten numeros, solo letras minimo 5 y maximo 100 caracteres
+                            </div>
                             <div class="form-group">
                                 <label class="control-label">Apellidos *</label>
                                 <input class="form-control" id="editLastNameUser" name="editLastNameUser" type="text"
                                     placeholder="Ingresa tus apellidos" required>
+                            </div>
+                            <div class="alert alert-danger" id="Elastnamealert" name="Elastnamealert"  role="alert" style="display:none">
+                                No se permiten numeros, solo letras maximo 100 caracteres
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Cedula *</label>
                                 <input class="form-control" id="editIdentifier" name="editIdentifier" type="number"
                                     placeholder="Ingresa tu número de cedula" required>
                             </div>
+                            <div class="alert alert-danger" id="EidentifierAlert" name="EidentifierAlert"  role="alert" style="display:none">
+                                solo se permiten caracteres numericos
+                            </div>
 
                             <div class="form-group">
                                 <label class="control-label">Correo Electronico *</label>
                                 <input class="form-control" id="editEmailuser" name="editEmailuser" type="email"
                                     placeholder="ingresa tu correo electrónico" required>
+                            </div>
+                            <div class="alert alert-danger" id="EemailAlert" name="EemailAlert"  role="alert" style="display:none">
+                                Ingresa un correo electroníco valido
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Pais *</label>
@@ -62,10 +74,16 @@
                                 <input class="form-control" id="editAddress" name="editAddress" type="text"
                                     placeholder="Ingresa tu dirección" required>
                             </div>
+                            <div class="alert alert-danger" id="EaddressAlert" name="EaddressAlert"  role="alert" style="display:none">
+                                Se permiten maximo 180 caracteres
+                            </div>
                             <div class="form-group">
                                 <label class="control-label">Celular *</label>
                                 <input class="form-control" id="editPhone" name="editPhone" type="text" placeholder="Ingresa tu número de celular"
                                     required>
+                            </div>
+                            <div class="alert alert-danger" id="EphoneAlert" name="EphoneAlert"  role="alert" style="display:none">
+                                Numero no valido
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Categoria *</label>
@@ -92,3 +110,80 @@
         </div>
     </div>
 </div>
+<script>
+    
+    const form = document.getElementById('editusercreate');
+    const inputs = document.querySelectorAll("#editusercreate input");
+
+    const expresiones = {
+        correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+        texto: /^[a-zA-ZÀ-ÿ\s]{1,100}$/
+    }
+
+    const validarFormulario = (e) =>{
+
+        switch (e.target.name){
+            case "editNameUser":
+                if( e.target.value == null || e.target.value.length <= 5 || e.target.value.length >= 100  || (!expresiones.texto.test(e.target.value)) ) {
+                    document.getElementById("Enamealert").style.display = "block";
+                    document.getElementById('btnUsuarioEdit').disabled = true;
+                }else{
+                    document.getElementById("Enamealert").style.display = "none";
+                    document.getElementById('btnUsuarioEdit').disabled = false;
+                }
+            break;
+            case "editLastNameUser":
+                if( e.target.value == null || e.target.value.length <= 0 || e.target.value.length >= 100  || (!expresiones.texto.test(e.target.value)) ) {
+                    document.getElementById("Elastnamealert").style.display = "block";
+                    document.getElementById('btnUsuarioEdit').disabled = true;
+                }else{
+                    document.getElementById("Elastnamealert").style.display = "none";
+                    document.getElementById('btnUsuarioEdit').disabled = false;
+                }
+            break;
+            case "EidentifierAlert":
+                if( isNaN(e.target.value) ) {
+                    document.getElementById("EidentifierAlert").style.display = "block";
+                    document.getElementById('btnUsuarioEdit').disabled = true;
+                }else{
+                    document.getElementById("EidentifierAlert").style.display = "none";
+                    document.getElementById('btnUsuarioEdit').disabled = false;
+                }
+            break;
+            case "editEmailuser":
+                if( !expresiones.correo.test(e.target.value)) {
+                    document.getElementById("EemailAlert").style.display = "block";
+                    document.getElementById('btnUsuarioEdit').disabled = true;
+                }else{
+                    document.getElementById("EemailAlert").style.display = "none";
+                    document.getElementById('btnUsuarioEdit').disabled = false;
+                }
+            break;
+            case "editAddress":
+                if( e.target.value.length >= 180 ) {
+                    document.getElementById("EaddressAlert").style.display = "block";
+                    document.getElementById('btnUsuario').disabled = true;
+                }else{
+                    document.getElementById("EaddressAlert").style.display = "none";
+                    document.getElementById('btnUsuario').disabled = false;
+                }
+            break;
+            case "editPhone":
+                if( e.target.value.length != 10 ) {
+                    document.getElementById("EphoneAlert").style.display = "block";
+                    document.getElementById('btnUsuario').disabled = true;
+                }else{
+                    document.getElementById("EphoneAlert").style.display = "none";
+                    document.getElementById('btnUsuario').disabled = false;
+                }
+            break;
+        }
+        
+    }
+
+
+    inputs.forEach((input) => {
+        input.addEventListener('keyup',validarFormulario);
+        input.addEventListener('blur',validarFormulario);
+    });
+</script>
