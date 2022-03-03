@@ -31,6 +31,6 @@ class welcomeNotification extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.welcome');
+        return $this->subject("Bienvenido a GML")->view('emails.welcome');
     }
 }

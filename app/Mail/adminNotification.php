@@ -29,6 +29,6 @@ class adminNotification extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.report');
+        return $this->subject("Reporte de usuarios por pais")->view('emails.report');
     }
 }

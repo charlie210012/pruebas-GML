@@ -8,6 +8,7 @@ use App\Models\empleado_rol;
 use App\Models\rol;
 use App\Events\userRegistered;
 use App\Http\Controllers\userController;
+use App\Models\email;
 
 
 class dataController extends Controller
@@ -33,13 +34,12 @@ class dataController extends Controller
                 "direccion" => $usuario->direccion,
                 "celular" => $usuario->celular,
 				"categoria" => $usuario->categoria->nombre,
-				"modificar" => '<i onclick = "modificar('.$usuario->id.');" class="far fa-edit" data-toggle="tooltip" title="Modificar" ></i>',
-				"eliminar" => '<i onclick = "eliminar('.$usuario->id.');" class="fas fa-trash-alt" data-toggle="tooltip" title="Eliminar"></i>'
+				"modificar" => '<i onclick = "modificar('.$usuario->id.');" class="far fa-edit" data-toggle="tooltip" title="Modificar" ></i>'
 			];
 			array_push($collection, $values);
         }
 		return datatables($collection)
-                ->rawColumns(['modificar','eliminar'])
+                ->rawColumns(['modificar'])
                 ->toJson();
     }
 
@@ -98,6 +98,7 @@ class dataController extends Controller
 
 
                     $reports = [];
+                    $emailAdmin = email::latest('id')->first();
                     $all = usuario::all();
                     $class = new userController();
                     $paises = $class->country();
@@ -113,7 +114,8 @@ class dataController extends Controller
                     $data = [
                         'usuario' =>$usuario,
                         'usuarios' =>$all,
-                        'reports'=> $reports
+                        'reports'=> $reports,
+                        'emailAdmin' => $emailAdmin
                     ];
                     event(new userRegistered($data));
 
@@ -238,25 +240,5 @@ class dataController extends Controller
         }
 
         
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $empleado = empleado::find($id);
-        $empleado->delete();
-
-        $rols = empleado_rol::all()->where('empleado_id',$id);
-        foreach($rols as $rol){
-            $rol->delete();
-        }
-        return response()->json([
-            'message' => 'ok',
-        ]);
     }
 }

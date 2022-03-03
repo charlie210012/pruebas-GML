@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\dataController;
+use App\Http\Controllers\emailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,7 @@ use App\Http\Controllers\dataController;
 Route::resource('/',userController::class);
 
 Route::resource('/user_data',dataController::class);
+
+Route::post("/data_email",[emailController::class,'store']);
 
 

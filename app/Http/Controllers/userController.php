@@ -9,6 +9,7 @@ use App\Models\categoria;
 use Illuminate\Http\Request;
 use App\Events\userRegistered;
 use App\Models\usuario;
+use App\Models\email;
 
 
 class userController extends Controller
@@ -20,14 +21,16 @@ class userController extends Controller
      */
     public function index()
     {   
-        
+
+        $email = email::latest('id')->first();
         $paises = $this->country();
         $categorias = categoria::all();
         
 
         return view('welcome',[
             'categorias' => $categorias,
-            'paises'=>$paises['data']
+            'paises'=>$paises['data'],
+            'email' => $email
         ]);
     }
 

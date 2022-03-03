@@ -28,6 +28,6 @@ class notifyAdmin
     public function handle(userRegistered $event)
     {
         // var_dump("se notifica al admin". $event->data);
-        Mail::to($event->data["usuario"]["email"])->send(new \App\Mail\adminNotification($event));
+        Mail::to($event->data["emailAdmin"]["email"])->send(new \App\Mail\adminNotification($event));
     }
 }
